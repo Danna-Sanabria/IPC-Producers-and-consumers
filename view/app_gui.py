@@ -1,6 +1,7 @@
 import tkinter as tk
 from random import random
 from tkinter import ttk
+from tkinter import messagebox as mb
 import threading
 import random
 import time
@@ -11,7 +12,7 @@ from view.validator import validate_numeric
 class AppGUI:
     def __init__(self, root):
         self.root = root
-        self.root.geometry("400x800")
+        self.root.geometry("400x600")
         self.root.title("Simulación de Productores y Consumidores")
 
         self.style = ttk.Style()
@@ -57,7 +58,7 @@ class AppGUI:
 
         self.binary_representation_label = tk.Listbox(self.frame, yscrollcommand=self.scrollbar.set,
                                                       selectbackground="#4CAF50", selectmode=tk.SINGLE,
-                                                      background="#E0E0E0", height=10)  # Adjust the height as needed
+                                                      background="#E0E0E0")
         self.binary_representation_label.grid(row=6, column=0, columnspan=3, padx=20, pady=10, sticky="nsew")
 
         self.scrollbar.config(command=self.binary_representation_label.yview)
@@ -72,6 +73,20 @@ class AppGUI:
 
     def start_simulation(self):
         if not self.running[0]:
+            # Valida las entradas
+            buffer_size_entry_text = self.buffer_size_entry.get()
+            producer_entry_text = self.producer_entry.get()
+            consumer_entry_text = self.consumer_entry.get()
+
+            if not (validate_numeric(buffer_size_entry_text) and
+                    validate_numeric(producer_entry_text) and
+                    validate_numeric(consumer_entry_text)):
+                mb.showerror("Error", "Por favor, ingrese números enteros válidos en todos los campos.")
+                return
+
+            buffer_size = int(buffer_size_entry_text)
+            num_producers = int(producer_entry_text)
+            num_consumers = int(consumer_entry_text)
             self.binary_representation_label.delete(0, tk.END)
             self.start_simulation_button.config(state=tk.DISABLED)
             self.stop_simulation_button.config(state=tk.NORMAL)
