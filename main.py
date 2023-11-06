@@ -1,4 +1,9 @@
-from view.main_window import run_app
+# main.py
+import tkinter as tk
+from tkinter import ttk
+from view.app_gui import AppGUI  # Import the AppGUI class
 
 if __name__ == "__main__":
-    run_app()
+    root = tk.Tk()
+    app = AppGUI(root)
+    app.run_app()
