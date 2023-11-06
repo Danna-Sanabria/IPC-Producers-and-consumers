@@ -12,7 +12,7 @@ from view.validator import validate_numeric
 class AppGUI:
     def __init__(self, root):
         self.root = root
-        self.root.geometry("400x600")
+        self.root.geometry("500x600")
         self.root.title("Simulación de Productores y Consumidores")
 
         self.style = ttk.Style()
