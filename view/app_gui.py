@@ -11,7 +11,7 @@ from view.validator import validate_numeric
 class AppGUI:
     def __init__(self, root):
         self.root = root
-        self.root.geometry("400x600")
+        self.root.geometry("400x800")
         self.root.title("Simulación de Productores y Consumidores")
 
         self.style = ttk.Style()
@@ -57,7 +57,7 @@ class AppGUI:
 
         self.binary_representation_label = tk.Listbox(self.frame, yscrollcommand=self.scrollbar.set,
                                                       selectbackground="#4CAF50", selectmode=tk.SINGLE,
-                                                      background="#E0E0E0")
+                                                      background="#E0E0E0", height=10)  # Adjust the height as needed
         self.binary_representation_label.grid(row=6, column=0, columnspan=3, padx=20, pady=10, sticky="nsew")
 
         self.scrollbar.config(command=self.binary_representation_label.yview)
